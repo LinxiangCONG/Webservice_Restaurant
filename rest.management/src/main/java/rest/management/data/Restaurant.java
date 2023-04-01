@@ -7,6 +7,18 @@ public class Restaurant {
 	private String category;
 	private double Lon;	// 经度
 	private double Lat;	// 纬度
+	
+	public Restaurant(String name, String address, String category) {
+		this.name = name;
+		this.address = address;
+		this.category = category;
+	}
+	
+	public Restaurant(String name, String address) {
+		this.name = name;
+		this.address = address;
+	}
+	
 	public String getName() {
 		return name;
 	}
