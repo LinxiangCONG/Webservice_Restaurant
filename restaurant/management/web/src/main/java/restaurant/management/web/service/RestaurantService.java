@@ -1,4 +1,4 @@
-package rest.management.service;
+package restaurant.management.web.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,15 +8,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.swing.text.html.HTMLEditorKit.Parser;
 
+import org.apache.el.parser.AstSemicolon;
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import rest.management.data.Restaurant;
+import restaurant.management.web.data.Category;
+import restaurant.management.web.data.Restaurant;
 
 public class RestaurantService {
 	
@@ -76,17 +80,21 @@ public class RestaurantService {
 		
  	}
 	
-	public void addRestaurant(Restaurant restaurant) {
+	public Restaurant addRestaurant(Restaurant restaurant) {
 		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
 		try {
 			Statement statement = PostgresqlJDBC.con.createStatement();
 			getLonLat(restaurant);
-			String sql = "Insert Into Restaurant(id_r, name_r, lon_r, lat_r, adr_r, cate_r) VALUES (DEFAULT,'"
-						+restaurant.getName()+ "'," + this.lon + "," + this.lat+ ",'" +restaurant.getAddress() + "','"+ restaurant.getCategory() +"');";
+			String sql = "Insert Into rests(id_r, name_r, lon_r, lat_r, adr_r, id_c) VALUES (DEFAULT,'"
+						+restaurant.getName()+ "'," + this.lon + "," + this.lat+ ",'" +restaurant.getAddress() + "','"+ restaurant.getCateId() +"');";
 			System.out.println(restaurant.getAddress());
 			int res = statement.executeUpdate(sql);
 			if(res == 1) {
 				System.out.println("data was added");
+				restaurant.setLon(this.lon);
+				restaurant.setLat(this.lat);
+				return restaurant;
+				
 			}else {
 				System.out.println("error : Insert");
 			}
@@ -96,14 +104,88 @@ public class RestaurantService {
 			e.printStackTrace();
 		}
 		PostgresqlJDBC.releaseConnection();
-		
+		return null;
 	}
 	
-	public static void main(String[] args) {
-		Restaurant restaurant = new Restaurant("MOA BIBIMBAP","38 Rue Vivienne 75002 Paris", "Korean");
-		RestaurantService rService = new RestaurantService();
-		rService.addRestaurant(restaurant);
+	public Restaurant searchRestaurantByName(String name) {
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		Restaurant restaurant = null;
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			String query = "SELECT * FROM rests WHERE name_r ='" +  name  + "';";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) {
+				restaurant = new Restaurant(resultSet.getString("name_r"),resultSet.getString("adr_r"),resultSet.getString("id_c"),
+						resultSet.getDouble("lon_r"),resultSet.getDouble("lat_r"));
+			}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+		return restaurant;
 	}
+	
+	public Collection<Restaurant> searchRestaurantsByCate(String cate) {
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		Collection<Restaurant> restaurants = new ArrayList<>();
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			String query = "SELECT * FROM Cates join Rests R on Cates.id_c = R.id_c WHERE name_c = '" + cate + "';";
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				Restaurant r = new Restaurant(resultSet.getString("name_r"),resultSet.getString("adr_r"),resultSet.getString("id_c"),
+						resultSet.getDouble("lon_r"),resultSet.getDouble("lat_r"));
+				restaurants.add(r);
+			}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+		return restaurants;
+	}
+	
+	public Category addCategory(Category category) {
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			String sql = "Insert Into cates(id_c, name_c) VALUES ('"+  category.getId() +"','"
+						+category.getName()+ "');";
+			int res = statement.executeUpdate(sql);
+			if(res == 1) {
+				System.out.println("data was added");
+				return category;
+				
+			}
+			else {
+				System.out.println("error : Insert");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+		return null;
+	}
+	
+	
+	
+//	public static void main(String[] args) {
+//		Restaurant restaurant = new Restaurant("MOA BIBIMBAP","38 Rue Vivienne 75002 Paris", "Korean");
+//		Restaurant restaurant = new Restaurant("le petit raspail","17 Rue Raspail, 92300 Levallois-Perret","French");
+//		String cate = "Italian";
+//		RestaurantService rService = new RestaurantService();
+//		Category category = new Category("01","French");
+//		rService.addCategory(category);
+//		Restaurant restaurant2 = rService.addRestaurant(restaurant);
+//		restaurant2.infos();
+//		Collection<Restaurant> restaurants = rService.searchRestaurantsByCate(cate);
+//		for(Restaurant restaurant : restaurants) {
+//			restaurant.infos();
+//		}
+//	}
 	
 	
 
@@ -111,7 +193,7 @@ public class RestaurantService {
 
 class PostgresqlJDBC{
 	
-	static Connection con = null;
+	static Connection con;
 	
 	public static Connection getConnection() {
 		
@@ -120,6 +202,7 @@ class PostgresqlJDBC{
 	         con = DriverManager
 	            .getConnection("jdbc:postgresql://postgresql-ycc.alwaysdata.net:5432/ycc_blog",
 	            "ycc", "QYCQyc123456");
+	         System.out.println(con);
 	         return con;
 	    } catch (Exception e) {
 	         e.printStackTrace();
