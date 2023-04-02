@@ -34,7 +34,7 @@ public class RestClient {
 	}
 	
 	public Response createXMLRestaurant(Restaurant restaurant) {
-		return client.target(REST_URI)
+		return client.target(REST_URI).path("restaurants")
 				.request(MediaType.APPLICATION_XML)
 				.post(Entity.entity(restaurant, MediaType.APPLICATION_XML));
 	}
