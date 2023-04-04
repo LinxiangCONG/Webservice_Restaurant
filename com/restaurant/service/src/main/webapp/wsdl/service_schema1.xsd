@@ -1,0 +1,63 @@
+<xs:schema xmlns:tns="http://www.com.restaurant.service" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://www.com.restaurant.service" version="1.0">
+
+  <xs:element name="addRestaurant" type="tns:addRestaurant"/>
+
+  <xs:element name="addRestaurantResponse" type="tns:addRestaurantResponse"/>
+
+  <xs:element name="getJSONResults" type="tns:getJSONResults"/>
+
+  <xs:element name="getJSONResultsResponse" type="tns:getJSONResultsResponse"/>
+
+  <xs:element name="getLonLat" type="tns:getLonLat"/>
+
+  <xs:element name="getLonLatResponse" type="tns:getLonLatResponse"/>
+
+  <xs:complexType name="getJSONResults">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getJSONResultsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:jsonArray"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="jsonArray">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="addRestaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="restaurant" type="tns:restaurant"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="restaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="category" type="xs:string"/>
+      <xs:element name="lat" type="xs:double"/>
+      <xs:element name="lon" type="xs:double"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addRestaurantResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLonLat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:restaurant"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLonLatResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+</xs:schema>

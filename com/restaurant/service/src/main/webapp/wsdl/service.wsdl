@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ServiceService" targetNamespace="http://www.com.restaurant.service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.com.restaurant.service" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://www.com.restaurant.service" schemaLocation="service_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="getJSONResults">
+    <wsdl:part name="parameters" element="tns:getJSONResults">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLonLat">
+    <wsdl:part name="parameters" element="tns:getLonLat">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJSONResultsResponse">
+    <wsdl:part name="parameters" element="tns:getJSONResultsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLonLatResponse">
+    <wsdl:part name="parameters" element="tns:getLonLatResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRestaurant">
+    <wsdl:part name="parameters" element="tns:addRestaurant">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRestaurantResponse">
+    <wsdl:part name="parameters" element="tns:addRestaurantResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Service">
+    <wsdl:operation name="getJSONResults">
+      <wsdl:input name="getJSONResults" message="tns:getJSONResults">
+    </wsdl:input>
+      <wsdl:output name="getJSONResultsResponse" message="tns:getJSONResultsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRestaurant">
+      <wsdl:input name="addRestaurant" message="tns:addRestaurant">
+    </wsdl:input>
+      <wsdl:output name="addRestaurantResponse" message="tns:addRestaurantResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLonLat">
+      <wsdl:input name="getLonLat" message="tns:getLonLat">
+    </wsdl:input>
+      <wsdl:output name="getLonLatResponse" message="tns:getLonLatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceServiceSoapBinding" type="tns:Service">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getJSONResults">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJSONResults">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJSONResultsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRestaurant">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addRestaurant">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addRestaurantResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLonLat">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLonLat">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLonLatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceService">
+    <wsdl:port name="ServicePort" binding="tns:ServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8080/com.restaurant.service/services/ServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
