@@ -5,8 +5,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -16,7 +19,9 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.restaurant.model.Category;
 import com.restaurant.model.Restaurant;
+
 
 @WebService(targetNamespace = "http://www.com.restaurant.service")
 public class Service {
@@ -95,9 +100,97 @@ public class Service {
 			e.printStackTrace();
 		}
 		
-		
+		PostgresqlJDBC.releaseConnection();
 		return (res == 1)? "data was added" : "data added fail";
 	}
+	
+	@WebMethod
+	public List<Restaurant> getRestaurantsByCate(@WebParam(name = "cate")Category cate) {
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		ResultSet rs = null;
+		List<Restaurant> arrayList = new ArrayList<>();
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM rests WHERE id_c = '" + cate.getCateId() + "';");
+			
+			while(rs != null && rs.next()) {
+				arrayList.add(new Restaurant(rs.getString("name_r"),rs.getDouble("lon_r"),rs.getDouble("lat_r"),
+												rs.getString("adr_r"), rs.getString("id_c")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+
+		if(!arrayList.isEmpty()) {
+			return arrayList;
+		}
+		return null;
+	}
+	
+	@WebMethod
+	public Restaurant getRestaurantByName(@WebParam(name = "restName") String restName) {
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		ResultSet rs = null;
+		Restaurant restaurant = null;
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM rests WHERE name_r = '" + restName + "';");
+			if(rs != null && rs.next()) {
+				restaurant = new Restaurant(rs.getString("name_r"),rs.getDouble("lon_r"),rs.getDouble("lat_r"),
+						rs.getString("adr_r"), rs.getString("id_c"));
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+
+		return restaurant;
+	}
+	
+	@WebMethod
+	public Category addCategory(@WebParam(name = "cateName") String cateName) {
+		Category category = new Category(cateName);
+		PostgresqlJDBC.con = PostgresqlJDBC.getConnection();
+		ResultSet rs = null;
+		int line = 0;
+		try {
+			Statement statement = PostgresqlJDBC.con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM cates ORDER BY id_c DESC LIMIT 1;");
+			if(rs != null && rs.next()) {
+				int maxId = Integer.parseInt(rs.getString("id_c").trim());
+				category.setCateId(Integer.toString(maxId+1));
+				line = statement.executeUpdate("INSERT INTO cates(id_c, name_c) VALUES ('" + category.getCateId() + "','" + category.getCateName() + "');");
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		PostgresqlJDBC.releaseConnection();
+		return (line == 1)? category : null;
+	}
+	
+//	public static void main(String[] args) {
+//		Service service = new Service();
+//		List<Restaurant> lRestaurants = service.getRestaurantsByCate(new Category("2","Chinese"));
+//		for(Restaurant restaurant : lRestaurants) {
+//			System.out.println("Name = " + restaurant.getName());
+//		}
+//		
+//		Restaurant restaurant = service.getRestaurantByName("Plancha Grill");
+//		System.out.println("The restaurant got by Name = " + restaurant.getName());
+//		
+//		Restaurant newRestaurant = new Restaurant("Saveurs Gourdmandes", "2 Rue Lavoisier, 95300 Pontoise", "2");
+//		System.out.println("Saveurs Gourdmandes : " + service.addRestaurant(newRestaurant));
+//		
+//		Category category = service.addCategory("English");
+//		System.out.println("Category : " + category.getCateName());
+//	}
+	
 	
 	
 }

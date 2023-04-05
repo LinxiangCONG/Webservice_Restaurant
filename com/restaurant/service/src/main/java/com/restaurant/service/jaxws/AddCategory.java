@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.5.5
  */
 
-@XmlRootElement(name = "getJSONResults", namespace = "http://www.com.restaurant.service")
+@XmlRootElement(name = "addCategory", namespace = "http://www.com.restaurant.service")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getJSONResults", namespace = "http://www.com.restaurant.service")
+@XmlType(name = "addCategory", namespace = "http://www.com.restaurant.service")
 
-public class GetJSONResults {
+public class AddCategory {
 
-    @XmlElement(name = "arg0")
-    private java.lang.String arg0;
+    @XmlElement(name = "cateName")
+    private java.lang.String cateName;
 
-    public java.lang.String getArg0() {
-        return this.arg0;
+    public java.lang.String getCateName() {
+        return this.cateName;
     }
 
-    public void setArg0(java.lang.String newArg0)  {
-        this.arg0 = newArg0;
+    public void setCateName(java.lang.String newCateName)  {
+        this.cateName = newCateName;
     }
 
 }

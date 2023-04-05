@@ -1,5 +1,9 @@
 <xs:schema xmlns:tns="http://www.com.restaurant.service" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://www.com.restaurant.service" version="1.0">
 
+  <xs:element name="addCategory" type="tns:addCategory"/>
+
+  <xs:element name="addCategoryResponse" type="tns:addCategoryResponse"/>
+
   <xs:element name="addRestaurant" type="tns:addRestaurant"/>
 
   <xs:element name="addRestaurantResponse" type="tns:addRestaurantResponse"/>
@@ -11,6 +15,14 @@
   <xs:element name="getLonLat" type="tns:getLonLat"/>
 
   <xs:element name="getLonLatResponse" type="tns:getLonLatResponse"/>
+
+  <xs:element name="getRestaurantByName" type="tns:getRestaurantByName"/>
+
+  <xs:element name="getRestaurantByNameResponse" type="tns:getRestaurantByNameResponse"/>
+
+  <xs:element name="getRestaurantsByCate" type="tns:getRestaurantsByCate"/>
+
+  <xs:element name="getRestaurantsByCateResponse" type="tns:getRestaurantsByCateResponse"/>
 
   <xs:complexType name="getJSONResults">
     <xs:sequence>
@@ -28,9 +40,15 @@
     <xs:sequence/>
   </xs:complexType>
 
-  <xs:complexType name="addRestaurant">
+  <xs:complexType name="getRestaurantByName">
     <xs:sequence>
-      <xs:element minOccurs="0" name="restaurant" type="tns:restaurant"/>
+      <xs:element minOccurs="0" name="restName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRestaurantByNameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:restaurant"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -44,9 +62,22 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="addRestaurantResponse">
+  <xs:complexType name="addCategory">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string"/>
+      <xs:element minOccurs="0" name="cateName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:category"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="category">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cateId" type="xs:string"/>
+      <xs:element minOccurs="0" name="cateName" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -58,6 +89,30 @@
 
   <xs:complexType name="getLonLatResponse">
     <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getRestaurantsByCate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cate" type="tns:category"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRestaurantsByCateResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:restaurant"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addRestaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="restaurant" type="tns:restaurant"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addRestaurantResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
 
 </xs:schema>

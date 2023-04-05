@@ -12,7 +12,25 @@ public class Restaurant {
 	private double Lon;
 	
 	private String category;
+	
+	public Restaurant() {}
 
+	public Restaurant(String name, double Lon, double Lat, String address, String category) {
+		
+		this.name = name;
+		this.Lon = Lon;
+		this.Lat = Lat;
+		this.address = address;
+		this.category = category;
+	}
+	
+	public Restaurant(String name, String address, String category) {
+		this.address = address;
+		this.name = name;
+		this.category = category;
+	}
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -52,4 +70,14 @@ public class Restaurant {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
+	
 }

@@ -5,12 +5,36 @@
   <import namespace="http://www.com.restaurant.service" schemaLocation="service_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="getRestaurantByNameResponse">
+    <wsdl:part name="parameters" element="tns:getRestaurantByNameResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getJSONResults">
     <wsdl:part name="parameters" element="tns:getJSONResults">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getRestaurantByName">
+    <wsdl:part name="parameters" element="tns:getRestaurantByName">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRestaurantsByCateResponse">
+    <wsdl:part name="parameters" element="tns:getRestaurantsByCateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCategory">
+    <wsdl:part name="parameters" element="tns:addCategory">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCategoryResponse">
+    <wsdl:part name="parameters" element="tns:addCategoryResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getLonLat">
     <wsdl:part name="parameters" element="tns:getLonLat">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRestaurantsByCate">
+    <wsdl:part name="parameters" element="tns:getRestaurantsByCate">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getJSONResultsResponse">
@@ -36,16 +60,34 @@
       <wsdl:output name="getJSONResultsResponse" message="tns:getJSONResultsResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="addRestaurant">
-      <wsdl:input name="addRestaurant" message="tns:addRestaurant">
+    <wsdl:operation name="getRestaurantByName">
+      <wsdl:input name="getRestaurantByName" message="tns:getRestaurantByName">
     </wsdl:input>
-      <wsdl:output name="addRestaurantResponse" message="tns:addRestaurantResponse">
+      <wsdl:output name="getRestaurantByNameResponse" message="tns:getRestaurantByNameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCategory">
+      <wsdl:input name="addCategory" message="tns:addCategory">
+    </wsdl:input>
+      <wsdl:output name="addCategoryResponse" message="tns:addCategoryResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getLonLat">
       <wsdl:input name="getLonLat" message="tns:getLonLat">
     </wsdl:input>
       <wsdl:output name="getLonLatResponse" message="tns:getLonLatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRestaurantsByCate">
+      <wsdl:input name="getRestaurantsByCate" message="tns:getRestaurantsByCate">
+    </wsdl:input>
+      <wsdl:output name="getRestaurantsByCateResponse" message="tns:getRestaurantsByCateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRestaurant">
+      <wsdl:input name="addRestaurant" message="tns:addRestaurant">
+    </wsdl:input>
+      <wsdl:output name="addRestaurantResponse" message="tns:addRestaurantResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -60,12 +102,21 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="addRestaurant">
+    <wsdl:operation name="getRestaurantByName">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="addRestaurant">
+      <wsdl:input name="getRestaurantByName">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="addRestaurantResponse">
+      <wsdl:output name="getRestaurantByNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCategory">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addCategory">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addCategoryResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -75,6 +126,24 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getLonLatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRestaurantsByCate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRestaurantsByCate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRestaurantsByCateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRestaurant">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addRestaurant">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addRestaurantResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

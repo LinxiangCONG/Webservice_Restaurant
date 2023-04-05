@@ -13,20 +13,20 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.5.5
  */
 
-@XmlRootElement(name = "getJSONResultsResponse", namespace = "http://www.com.restaurant.service")
+@XmlRootElement(name = "getRestaurantByNameResponse", namespace = "http://www.com.restaurant.service")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getJSONResultsResponse", namespace = "http://www.com.restaurant.service")
+@XmlType(name = "getRestaurantByNameResponse", namespace = "http://www.com.restaurant.service")
 
-public class GetJSONResultsResponse {
+public class GetRestaurantByNameResponse {
 
     @XmlElement(name = "return")
-    private org.json.JSONArray _return;
+    private com.restaurant.model.Restaurant _return;
 
-    public org.json.JSONArray getReturn() {
+    public com.restaurant.model.Restaurant getReturn() {
         return this._return;
     }
 
-    public void setReturn(org.json.JSONArray new_return)  {
+    public void setReturn(com.restaurant.model.Restaurant new_return)  {
         this._return = new_return;
     }
 
