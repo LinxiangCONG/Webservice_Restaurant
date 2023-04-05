@@ -49,65 +49,69 @@ public final class Service_ServicePort_Client {
         ServiceService ss = new ServiceService(wsdlURL, SERVICE_NAME);
         Service port = ss.getServicePort();
 
-        {
-        System.out.println("Invoking getJSONResults...");
-        java.lang.String _getJSONResults_arg0 = "_getJSONResults_arg01485962140";
-        com.restaurant.service.client.JsonArray _getJSONResults__return = port.getJSONResults(_getJSONResults_arg0);
-        System.out.println("getJSONResults.result=" + _getJSONResults__return);
-
-
-        }
+//        {
+//        System.out.println("Invoking getJSONResults...");
+//        java.lang.String _getJSONResults_arg0 = "_getJSONResults_arg01485962140";
+//        com.restaurant.service.client.JsonArray _getJSONResults__return = port.getJSONResults(_getJSONResults_arg0);
+//        System.out.println("getJSONResults.result=" + _getJSONResults__return);
+//
+//
+//        }
         {
         System.out.println("Invoking getRestaurantByName...");
-        java.lang.String _getRestaurantByName_restName = "_getRestaurantByName_restName1781255737";
+        java.lang.String _getRestaurantByName_restName = "Plancha Grill";
         com.restaurant.service.client.Restaurant _getRestaurantByName__return = port.getRestaurantByName(_getRestaurantByName_restName);
-        System.out.println("getRestaurantByName.result=" + _getRestaurantByName__return);
+        System.out.println("getRestaurantByName.result=" + _getRestaurantByName__return.getName());
 
 
         }
-        {
-        System.out.println("Invoking addCategory...");
-        java.lang.String _addCategory_cateName = "_addCategory_cateName-94844433";
-        com.restaurant.service.client.Category _addCategory__return = port.addCategory(_addCategory_cateName);
-        System.out.println("addCategory.result=" + _addCategory__return);
-
-
-        }
-        {
-        System.out.println("Invoking getLonLat...");
-        com.restaurant.service.client.Restaurant _getLonLat_arg0 = new com.restaurant.service.client.Restaurant();
-        _getLonLat_arg0.setAddress("Address1623497179");
-        _getLonLat_arg0.setCategory("Category-1323861188");
-        _getLonLat_arg0.setLat(0.13834707389858802);
-        _getLonLat_arg0.setLon(0.2092206905147196);
-        _getLonLat_arg0.setName("Name-235472495");
-        port.getLonLat(_getLonLat_arg0);
-
-
-        }
+//        {
+//        System.out.println("Invoking addCategory...");
+//        java.lang.String _addCategory_cateName = "_addCategory_cateName-94844433";
+//        com.restaurant.service.client.Category _addCategory__return = port.addCategory(_addCategory_cateName);
+//        System.out.println("addCategory.result=" + _addCategory__return);
+//
+//
+//        }
+//        {
+//        System.out.println("Invoking getLonLat...");
+//        com.restaurant.service.client.Restaurant _getLonLat_arg0 = new com.restaurant.service.client.Restaurant();
+//        _getLonLat_arg0.setAddress("63 Quai de la Gare, 75013 Paris");
+//        _getLonLat_arg0.setCategory("4");
+//        _getLonLat_arg0.setLat(0);
+//        _getLonLat_arg0.setLon(0);
+//        _getLonLat_arg0.setName("JMT - Jon Mat Taeng Paris");
+//        port.getLonLat(_getLonLat_arg0);
+//
+//
+//        }
         {
         System.out.println("Invoking getRestaurantsByCate...");
         com.restaurant.service.client.Category _getRestaurantsByCate_cate = new com.restaurant.service.client.Category();
-        _getRestaurantsByCate_cate.setCateId("CateId858968135");
-        _getRestaurantsByCate_cate.setCateName("CateName437627931");
+        _getRestaurantsByCate_cate.setCateId("3");
+        _getRestaurantsByCate_cate.setCateName("Chinese");
         java.util.List<com.restaurant.service.client.Restaurant> _getRestaurantsByCate__return = port.getRestaurantsByCate(_getRestaurantsByCate_cate);
-        System.out.println("getRestaurantsByCate.result=" + _getRestaurantsByCate__return);
+        if(!_getRestaurantsByCate__return.isEmpty()) {
+        	for(Restaurant restaurant : _getRestaurantsByCate__return) {
+        		System.out.println("Caategorty : " + _getRestaurantsByCate_cate.getCateName() + " -->  Name : " + restaurant.getName());
+        	}
+        }
 
 
         }
-        {
-        System.out.println("Invoking addRestaurant...");
-        com.restaurant.service.client.Restaurant _addRestaurant_restaurant = new com.restaurant.service.client.Restaurant();
-        _addRestaurant_restaurant.setAddress("Address791762906");
-        _addRestaurant_restaurant.setCategory("Category-363841218");
-        _addRestaurant_restaurant.setLat(0.6962581177399367);
-        _addRestaurant_restaurant.setLon(0.081997329002924);
-        _addRestaurant_restaurant.setName("Name1355101112");
-        java.lang.String _addRestaurant__return = port.addRestaurant(_addRestaurant_restaurant);
-        System.out.println("addRestaurant.result=" + _addRestaurant__return);
-
-
-        }
+//        {
+//        System.out.println("Invoking addRestaurant...");
+//        com.restaurant.service.client.Restaurant _addRestaurant_restaurant = new com.restaurant.service.client.Restaurant();
+//        _addRestaurant_restaurant.setAddress("Address791762906");
+//        _addRestaurant_restaurant.setCategory("Category-363841218");
+//        _addRestaurant_restaurant.setLat(0.6962581177399367);
+//        _addRestaurant_restaurant.setLon(0.081997329002924);
+//        _addRestaurant_restaurant.setName("Name1355101112");
+//        java.lang.String _addRestaurant__return = port.addRestaurant(_addRestaurant_restaurant);
+//        System.out.println("addRestaurant.result=" + _addRestaurant__return);
+//
+//
+//        }
 
         System.exit(0);
     }
