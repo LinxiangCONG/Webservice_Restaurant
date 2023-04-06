@@ -70,9 +70,7 @@ CREATE TABLE Rests(
 );
 
 -- We have provided some data for testing
-INSERT INTO cates(id_c, name_c) VALUES ('1','French'),('2','Italian'),
-																			 ('3','Chinese'),('4','Korean'),
-																			 ('5','Japanese'),('6','English');
+INSERT INTO cates(id_c, name_c) VALUES ('1','French'),('2','Italian'),('3','Chinese'),('4','Korean'),('5','Japanese'),('6','English');
 
 Insert Into rests(id_r, name_r, lon_r, lat_r, adr_r, id_c) VALUES 
 (DEFAULT,'Plancha Grill',2.079,49.048,'60 Chau. Jules César, 95300 Pontoise','3'),
@@ -106,9 +104,41 @@ So after introducing the tools we will use, let's get into the subject. We prese
 
 ##### RESTful
 
-###### Service's description
+###### Services' description
 
-We created a web dynamic project named 'restaurant.management.web' and 3 packages: data, resource and service.  The package data, it contains 2 data models : Category and Restaurant. The package service contains a class 'RestaurantService' who implement the logique of the services. And the package resource contains a class 'RestaurantResource' who returns the results  gotten by the service in the format XML.
+We created a web dynamic project named '<u>restaurant.management.web</u>' and 3 packages: data, resource and service.  The package data, it contains 2 data models : Category and Restaurant. The package service contains a class 'RestaurantService' who implement the logique of the services. And the package resource contains a class 'RestaurantResource' who returns the results  gotten by the service in the format XML. 
+
+First of all, the class Category has some attributs, for example id and the corresponding name. And about the class Restaurant, some attributs like name, address, cateId, Lon(longitude) and Lat(Latitude). 
+
+Then the class RestaurantService, it implement the main service, like adding a restaurant to database, searching a restaurant by its name, searching some restaurants by a given category and adding a new category as mentioned above. And a tool class named PostgresqlJDBC who encapsulates the main code for database connections and resource release to make it easier for us to establish connections to the database.
+
+Finally, the class RestaurantRessource calls these services offered by RestaurantService and encapsulates the data returned by service in XML form and returns the data to the client. The URL addresses of these services are as follows.
+
+```
+					The root path									->			/
+@POST			addRestaurant service 				->			/restaurants
+@GET			getRestaurantByName						->			/restaurants/{name}
+@GET			getRestaurantByCate						-> 			/restaurants/category/{cate}
+@POST			addCategory										->			/categories
+```
+
+
+
+###### Clients' description
+
+The client, of course, users can only use the services provided by the server.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

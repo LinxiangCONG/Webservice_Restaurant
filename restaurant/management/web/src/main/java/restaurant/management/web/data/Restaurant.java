@@ -8,8 +8,8 @@ public class Restaurant {
 	private String name;
 	private String address;
 	private String cateId;
-	private double Lon;	// 经度
-	private double Lat;	// 纬度
+	private double Lon;	
+	private double Lat;	
 	
 	public Restaurant() {}
 	
