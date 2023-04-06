@@ -79,7 +79,7 @@ public class RestaurantResource {
 	@Path("/categories")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
-	public Response addRestaurant(Category category) {
+	public Response addCategory(Category category) {
 		Category c = service.addCategory(category);
 		if(c == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
