@@ -48,17 +48,17 @@ The project requires us to implement the same theme in two different ways ( Soap
 
 ##### The dependencies
 
-The project's dependencies, we have been also uploaded on the Github. For me, I have been imported these dependencies that on the Github, if your 'Library' is like this, it works.
+The project's dependencies, we have been uploaded on the Github repository. For us, We have been imported these dependencies that on the Github, if your 'Library' is like this, it works.
 
-<img src="/Users/yc/Documents/WBP/Webservice_Restaurant/img/Library.png" alt="Library" style="zoom:33%;" />
+<img src="./img/Library.png" alt="Library" style="zoom:33%;" />
 
 
 
 ##### Database
 
-As described above, we designed two tables 'cates' and 'rests' who were connected by a relation like the Figure following.
+As described above, we designed two tables 'cates' and 'rests' who were connected by a relation like the figure following.
 
-<img src="/Users/yc/Documents/WBP/Webservice_Restaurant/img/schema.png" alt="schema" style="zoom:25%;" />
+<img src="./img/schema.png" alt="schema" style="zoom:25%;" />
 
 That is to say, a tuple of the table 'cates' contains a lot of restaurants in the table 'rests' who has the same id_c like the tuple. But a restaurant belongs to only a category. The DDL we provide is shown below.
 
@@ -70,7 +70,7 @@ CREATE TABLE Cates(
 );
 
 CREATE TABLE Rests(
-    id_r SERIAL NOT NULL,       -- id auto augment
+    id_r SERIAL NOT NULL,       -- id auto-augment
     name_r varchar(30) NOT NULL,
     lon_r numeric,              
     lat_r numeric,             
@@ -167,7 +167,7 @@ We created also a web dynamic project named '<u>com.management.service</u>' and 
 3. getRestaurantsByName
 4. getRestaurantsByCate
 
-We take the same example for you. After constructing the SOAP project and implementing the above services, run the Tomcat server, and "Test with Web Service Explorer", if you have the same result as me like the following image in the WSE, SOAP project it works too.
+In SOAP, there is no notion about the method or url path. We take the same example for you. After constructing the SOAP project and implementing the above services, run the Tomcat server, and "Test with Web Service Explorer", if you have the same result as me like the following image in the WSE, SOAP project it works too.
 
 <img src="./img/getByCate2.png" alt="getByCate2" style="zoom:33%;" />
 
@@ -175,15 +175,13 @@ We take the same example for you. After constructing the SOAP project and implem
 
 ###### Clients' description
 
-And the client, 
+And the client, of course, as mentioned above, you can run your own java application in local. 
 
 
 
+### Acknowledgements
 
-
-
-
-
+Before concluding, we would like to express our sincere thanks to my partener <u>Linxiang CONG</u> who contributed to the realization of this project. First of all, we would like to thank our supervisor Madam. **<u>Aikaterini Tzompanaki</u>** for her precious help, her wise advice and her support throughout this project. We are grateful for the quality of her teaching and guidance. We would also like to thank the people who took the time to read this report and follow our work. We hope that you were able to appreciate our subject and our reasoning. Finally, we would like to thank CY Cergy Paris Université for giving us the opportunity to carry out this project and to put our knowledge into practice. We hope that this experience will be useful for our professional future.
 
 
 
