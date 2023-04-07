@@ -49,14 +49,6 @@ public final class Service_ServicePort_Client {
         ServiceService ss = new ServiceService(wsdlURL, SERVICE_NAME);
         Service port = ss.getServicePort();
 
-//        {
-//        System.out.println("Invoking getJSONResults...");
-//        java.lang.String _getJSONResults_arg0 = "_getJSONResults_arg01485962140";
-//        com.restaurant.service.client.JsonArray _getJSONResults__return = port.getJSONResults(_getJSONResults_arg0);
-//        System.out.println("getJSONResults.result=" + _getJSONResults__return);
-//
-//
-//        }
         {
         System.out.println("Invoking getRestaurantByName...");
         java.lang.String _getRestaurantByName_restName = "Plancha Grill";
@@ -70,18 +62,6 @@ public final class Service_ServicePort_Client {
 //        java.lang.String _addCategory_cateName = "_addCategory_cateName-94844433";
 //        com.restaurant.service.client.Category _addCategory__return = port.addCategory(_addCategory_cateName);
 //        System.out.println("addCategory.result=" + _addCategory__return);
-//
-//
-//        }
-//        {
-//        System.out.println("Invoking getLonLat...");
-//        com.restaurant.service.client.Restaurant _getLonLat_arg0 = new com.restaurant.service.client.Restaurant();
-//        _getLonLat_arg0.setAddress("63 Quai de la Gare, 75013 Paris");
-//        _getLonLat_arg0.setCategory("4");
-//        _getLonLat_arg0.setLat(0);
-//        _getLonLat_arg0.setLon(0);
-//        _getLonLat_arg0.setName("JMT - Jon Mat Taeng Paris");
-//        port.getLonLat(_getLonLat_arg0);
 //
 //
 //        }

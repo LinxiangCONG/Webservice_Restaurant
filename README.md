@@ -128,9 +128,11 @@ Finally, the class RestaurantRessource calls these services offered by Restauran
 | ------ | ------------------- | ---------------------------- |
 |        | (the root path)     | /                            |
 | @POST  | addRestaurant       | /restaurants                 |
-| @GET   | getRestaurantByName | /restaurants/{name}          |
+| @GET   | getRestaurantByName | /restaurants/name/{name}     |
 | @GET   | getRestaurantByCate | /restaurants/category/{cate} |
-| @POST  | addCategory         | /categories                  |
+| @POST  | addCategory         | /categories/category         |
+| @GET   | getRestaurant_BD_Id | /restairants/id/{id}         |
+| @GET   | getAllRestaurants   | /restaurants                 |
 
 After constructing these services, we run the Tomcat server and use <u>Postman</u> to check. If you follow the above steps, by default the web service's url is like this :
 
