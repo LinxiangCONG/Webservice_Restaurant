@@ -27,7 +27,8 @@ The project aims to construct a web service to implement the following features 
 ##### The different components 
 
 1. After comparing and testing the different APIs, we decided to use **<u>Nominatim API</u>** as our main api tool
-2. Since we have already learned about database ( Postgresql ) and we knew a free platform named AlwaysData that can provide the remote service of database. So we chose it to store data.
+2. Since we have already learned about database ( **<u>Postgresql</u>** ) and we knew a free platform named AlwaysData that can provide the remote service of database. So we chose it to store data.
+3. We use <u>**Postman**</u> to test these services are working properly.
 
 
 
@@ -43,17 +44,27 @@ As we all known, the map api is now an essential part of our daily life, you may
 
 The project requires us to implement the same theme in two different ways ( Soap and RESTful ). We will describe our idea about how to implement it, but before this, we have to introduce the structure of database and usage of Nominatim API.
 
+
+
+##### The dependencies
+
+The project's dependencies, we have been also uploaded on the Github. For me, I have been imported these dependencies that on the Github, if your 'Library' is like this, it works.
+
+<img src="/Users/yc/Documents/WBP/Webservice_Restaurant/img/Library.png" alt="Library" style="zoom:33%;" />
+
+
+
 ##### Database
 
 As described above, we designed two tables 'cates' and 'rests' who were connected by a relation like the Figure following.
 
-<img src="/Users/yc/Library/Application Support/typora-user-images/image-20230405190247424.png" alt="image-20230405190247424" style="zoom:25%;" />
+<img src="/Users/yc/Documents/WBP/Webservice_Restaurant/img/schema.png" alt="schema" style="zoom:25%;" />
 
 That is to say, a tuple of the table 'cates' contains a lot of restaurants in the table 'rests' who has the same id_c like the tuple. But a restaurant belongs to only a category. The DDL we provide is shown below.
 
 ```sql
 CREATE TABLE Cates(
-    id_c char(2) NOT NULL,
+    id_c varchar(3) NOT NULL,
     name_c varchar(20) NOT NULL ,
     constraint Cates_pk primary key (id_c)
 );
@@ -64,7 +75,7 @@ CREATE TABLE Rests(
     lon_r numeric,              
     lat_r numeric,             
     adr_r varchar(50) NOT NULL,
-    id_c varchar(20),
+    id_c varchar(3),
     constraint Rests_pk primary key (id_r),
     constraint Rests_fk foreign key (id_c) references Cates(id_c)
 );
@@ -76,7 +87,8 @@ Insert Into rests(id_r, name_r, lon_r, lat_r, adr_r, id_c) VALUES
 (DEFAULT,'Plancha Grill',2.079,49.048,'60 Chau. Jules César, 95300 Pontoise','3'),
 (DEFAULT,'Olie e Farina Paris',2.373,48.841,'30 Quai de la Rapée, 75012 Paris','2'),
 (DEFAULT,'JMT - Jon Mat Taeng Paris',2.374,48.836,'63 Quai de la Gare, 75013 Paris','4'),
-(DEFAULT,'Pedra Alta',2.303,48.868,'25 Rue Marbeuf, 75008 Paris','1'),                                                                      (DEFAULT,'Zuzuttomo',2.347,48.868,'10 Rue Poissonnière, 75002 Paris','5'),
+(DEFAULT,'Pedra Alta',2.303,48.868,'25 Rue Marbeuf, 75008 Paris','1'),
+(DEFAULT,'Zuzuttomo',2.347,48.868,'10 Rue Poissonnière, 75002 Paris','5'),
 (DEFAULT,'Saveurs Gourmandes',2.081909134262767,49.0467208,'10 Rue Poissonnière, 75002 Paris','3');
 
 drop table if exists Rests;
@@ -96,8 +108,6 @@ It allows to call a external service to fetch the latitude and longitude of a gi
 https://nominatim.openstreetmap.org/search?q=<restaurantName>&format=json&limit=1
 ```
 
-
-
 So after introducing the tools we will use, let's get into the subject. We present firstly RESTful.
 
 
@@ -110,23 +120,62 @@ We created a web dynamic project named '<u>restaurant.management.web</u>' and 3 
 
 First of all, the class Category has some attributs, for example id and the corresponding name. And about the class Restaurant, some attributs like name, address, cateId, Lon(longitude) and Lat(Latitude). 
 
-Then the class RestaurantService, it implement the main service, like adding a restaurant to database, searching a restaurant by its name, searching some restaurants by a given category and adding a new category as mentioned above. And a tool class named PostgresqlJDBC who encapsulates the main code for database connections and resource release to make it easier for us to establish connections to the database.
+Then the class RestaurantService, it implement the main service, like adding a restaurant to database, searching a restaurant by its name, searching some restaurants by a given category and adding a new category as mentioned above, etc. And a tool class named PostgresqlJDBC who encapsulates the main code for database connections and resource release to make it easier for us to establish connections to the database and to release connections.
 
 Finally, the class RestaurantRessource calls these services offered by RestaurantService and encapsulates the data returned by service in XML form and returns the data to the client. The URL addresses of these services are as follows.
 
+| Method | Service's name      | Corresponding path           |
+| ------ | ------------------- | ---------------------------- |
+|        | (the root path)     | /                            |
+| @POST  | addRestaurant       | /restaurants                 |
+| @GET   | getRestaurantByName | /restaurants/{name}          |
+| @GET   | getRestaurantByCate | /restaurants/category/{cate} |
+| @POST  | addCategory         | /categories                  |
+
+After constructing these services, we run the Tomcat server and use <u>Postman</u> to check. If you follow the above steps, by default the web service's url is like this :
+
 ```
-					The root path									->			/
-@POST			addRestaurant service 				->			/restaurants
-@GET			getRestaurantByName						->			/restaurants/{name}
-@GET			getRestaurantByCate						-> 			/restaurants/category/{cate}
-@POST			addCategory										->			/categories
+http://localhost:8080/restaurant.management.web/api/
 ```
+
+For example, I want to check all the korean restaurants, so we should test the following url if that works.
+
+```
+http://localhost:8080/restaurant.management.web/api/restaurants/category/Korean
+```
+
+If you are going to seeing the following response in the Postman, congratulations !
+
+<img src="./img/getByCate.png" alt="getByCate" style="zoom:33%;" />
 
 
 
 ###### Clients' description
 
-The client, of course, users can only use the services provided by the server.
+The client, of course, users can only use the services provided by the server. It allows us to call the web service in a java application, that's to say we can combine this service in an another java application, for example desktop software.
+
+
+
+##### SOAP
+
+###### Services' description
+
+We created also a web dynamic project named '<u>com.management.service</u>' and 2 packages: model and service.  The package model contains two classes who are almost same as the above RESTful's project, we just changed name of the package. And the package service contains a class Service who implement the the services following :
+
+1. addRestaurant
+2. addCategory
+3. getRestaurantsByName
+4. getRestaurantsByCate
+
+We take the same example for you. After constructing the SOAP project and implementing the above services, run the Tomcat server, and "Test with Web Service Explorer", if you have the same result as me like the following image in the WSE, SOAP project it works too.
+
+<img src="./img/getByCate2.png" alt="getByCate2" style="zoom:33%;" />
+
+
+
+###### Clients' description
+
+And the client, 
 
 
 
