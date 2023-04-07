@@ -131,7 +131,7 @@ Finally, the class RestaurantRessource calls these services offered by Restauran
 | @GET   | getRestaurantByName | /restaurants/name/{name}     |
 | @GET   | getRestaurantByCate | /restaurants/category/{cate} |
 | @POST  | addCategory         | /categories/category         |
-| @GET   | getRestaurant_BD_Id | /restairants/id/{id}         |
+| @GET   | getRestaurant_BD_Id | /restaurants/id/{id}         |
 | @GET   | getAllRestaurants   | /restaurants                 |
 
 After constructing these services, we run the Tomcat server and use <u>Postman</u> to check. If you follow the above steps, by default the web service's url is like this :
@@ -183,7 +183,7 @@ And the client, of course, as mentioned above, you can run your own java applica
 
 ### Acknowledgements
 
-Before concluding, we would like to express our sincere thanks to my partener <u>Linxiang CONG</u> who contributed to the realization of this project. First of all, we would like to thank our supervisor Madam. **<u>Aikaterini Tzompanaki</u>** for her precious help, her wise advice and her support throughout this project. We are grateful for the quality of her teaching and guidance. We would also like to thank the people who took the time to read this report and follow our work. We hope that you were able to appreciate our subject and our reasoning. Finally, we would like to thank CY Cergy Paris Université for giving us the opportunity to carry out this project and to put our knowledge into practice. We hope that this experience will be useful for our professional future.
+Before concluding, we would like to express our sincere thanks to my partener <u>Linxiang CONG</u> who contributed to the realization of this project. First of all, we would like to thank our supervisor Madam **<u>Aikaterini Tzompanaki</u>** for her precious help, her wise advice and her support throughout this project. We are grateful for the quality of her teaching and guidance. We would also like to thank the people who took the time to read this report and follow our work. We hope that you were able to appreciate our subject and our reasoning. Finally, we would like to thank CY Cergy Paris Université for giving us the opportunity to carry out this project and to put our knowledge into practice. We hope that this experience will be useful for our professional future.
 
 
 
