@@ -16,12 +16,16 @@ import restaurant.management.web.data.Restaurant;
 import restaurant.map.OpenStreetMap;
 
 
-
+/**
+ * @class RestaurantService
+ * @brief This class represents the main logics of web service
+ * 
+ * This class contains methods to perform various operations, such as get restaurant by its name.
+ */
 public class RestaurantService {
 	
 	private static Map<Integer, Restaurant> RESTAURANT_DATA = new HashMap<Integer, Restaurant>();
 
-	
 	public Restaurant addRestaurant(Restaurant r) {
 		
 		OpenStreetMap info = new OpenStreetMap();
@@ -133,7 +137,6 @@ public class RestaurantService {
 			}
 		} 
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PostgresqlJDBC.releaseConnection();
@@ -161,13 +164,9 @@ public class RestaurantService {
 				String adr_r = rs.getString("adr_r");
 				String id_c = rs.getString("id_c");
 				Restaurant restaurant = new Restaurant(id_r, name_r, adr_r, lon_r, lat_r, id_c);
-				
-				
-			
 				restaurants.add(restaurant);
 			}		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PostgresqlJDBC.releaseConnection();
@@ -184,14 +183,12 @@ public class RestaurantService {
 			if(res == 1) {
 				System.out.println("data was added");
 				return category;
-				
 			}
 			else {
 				System.out.println("error : Insert");
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PostgresqlJDBC.releaseConnection();
@@ -201,6 +198,12 @@ public class RestaurantService {
 }
 
 
+/**
+ * @class PostgresqlJDBC
+ * @brief This class allows developers or users to get and release the resource more easily.
+ * 
+ * This class contains methods to perform 2 operations : getting DB connection and releasing connection.
+ */
 class PostgresqlJDBC{
 	 
 	 static Connection con = null;
@@ -224,7 +227,6 @@ class PostgresqlJDBC{
 	  try {
 	   con.close();
 	  } catch (SQLException e) {
-	   // TODO Auto-generated catch block
 	   e.printStackTrace();
 	  }
 	  con = null;

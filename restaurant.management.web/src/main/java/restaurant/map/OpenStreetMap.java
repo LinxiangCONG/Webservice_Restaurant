@@ -6,6 +6,12 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * @class OpenStreetMao
+ * @brief This class allows users and developer to fetch lat and lon by Nominatim api
+ * 
+ * This class contains methods to perform just one operation : getting a given restaurant's lat and lon by processing through strings
+ */
 public class OpenStreetMap {
 	
 	public String getRestaurantInfo(String nameORadresse) {
