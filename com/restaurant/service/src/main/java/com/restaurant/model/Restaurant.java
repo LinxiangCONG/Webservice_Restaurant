@@ -1,7 +1,12 @@
 package com.restaurant.model;
 
 
-
+/**
+ * @class Restaurant
+ * @brief This class represents some attributes of Restaurant
+ * 
+ * This class contains methods to perform various operations, such as getters and setters.
+ */
 public class Restaurant {
 	private String name;
 	
@@ -16,7 +21,6 @@ public class Restaurant {
 	public Restaurant() {}
 
 	public Restaurant(String name, double Lon, double Lat, String address, String category) {
-		
 		this.name = name;
 		this.Lon = Lon;
 		this.Lat = Lat;

@@ -51,8 +51,7 @@ public class Service {
 		return null;
 	}
 	
-	public void getLonLat(Restaurant restaurant) {
-			
+	public void getLonLat(Restaurant restaurant) {		
 		JSONArray results = getJSONResults(restaurant.getName());	
 		if(results != null) {	// if the api can not find the lat and lon of the restaurant by its name.
 			if(results.length() > 0) {
@@ -174,6 +173,7 @@ public class Service {
 		return (line == 1)? category : null;
 	}
 	
+//  function main for testing locally
 //	public static void main(String[] args) {
 //		Service service = new Service();
 //		List<Restaurant> lRestaurants = service.getRestaurantsByCate(new Category("2","Chinese"));
@@ -190,15 +190,17 @@ public class Service {
 //		Category category = service.addCategory("English");
 //		System.out.println("Category : " + category.getCateName());
 //	}
-	
-	
-	
+
 }
 
 
 
-
-
+/**
+ * @class PostgresqlJDBC
+ * @brief This class allows developers or users to get and release the resource more easily.
+ * 
+ * This class contains methods to perform 2 operations : getting DB connection and releasing connection.
+ */
 class PostgresqlJDBC{
 	
 	static Connection con;
@@ -223,7 +225,6 @@ class PostgresqlJDBC{
 		try {
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		con = null;
